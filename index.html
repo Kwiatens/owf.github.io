@@ -252,109 +252,70 @@
   <!-- Zawartość główna (pblo tu pisz, dasz rade) -->
   <div class="content">
     <div class="doc-area">
-      <center><h1>OWF R1 Documentation</h1></center>
-      <p>&nbsp;</p>
-      <hr>
-      <p>&nbsp;</p>
-      <center><img src="Original_OWFR1_logo.png" style="filter: invert(1);"></center>
-
+      <h2>1. Introduction</h2>
       <p>
-        OWF (Offgrid Weather Forecaster) is an offline, sensor-based weather prediction system powered by the <a href="https://meshtastic.org">Meshtastic®</a> ecosystem. This page covers everything needed to build, use, and understand the OWF R1 device.
+        The OWF (Offgrid Weather Forecaster) is a standalone weather forecasting device that uses sensor data and local algorithms to predict weather conditions without any internet access. It is powered by <a href="https://meshtastic.org">meshtastic®</a> and designed for low-power, remote operation.
       </p>
 
-      <p>&nbsp;</p>
-      <hr>
-      <p>&nbsp;</p>
-
-      <!-- Section: Overview -->
-      <h2>1. Overview</h2>
-      <p>
-        The OWF device is designed for low-power, autonomous forecasting without internet access. Based on the Zambretti forecasting algorithm and enhanced with custom prediction logic, it offers accurate, decentralized weather reporting.
-      </p>
-
-      <!-- Section: Features -->
       <h2>2. Features</h2>
       <ul>
-        <li>100% off-grid operation</li>
-        <li>Forecasts based on pressure, trend, and other sensor data</li>
-        <li>Meshtastic® integration for distributed sensor networks</li>
-        <li>Daily automatic forecasts and on-demand reports</li>
-        <li>Expandable via Arduino-compatible headers</li>
+        <li>Completely offgrid – no Wi-Fi, no GSM, no internet required</li>
+        <li>Uses pressure trends and algorithms like Zambretti for prediction</li>
+        <li>Supports Meshtastic® radio communication</li>
+        <li>Forecast sharing between devices</li>
+        <li>Low power consumption, solar-compatible</li>
       </ul>
 
-      <!-- Section: Hardware -->
-      <h2>3. Hardware Specifications</h2>
-      <table>
-        <tr><td><strong>MCU:</strong></td><td>Arduino Pro Mini 3.3V / 8 MHz</td></tr>
-        <tr><td><strong>Sensor:</strong></td><td>BMP280 or BME280</td></tr>
-        <tr><td><strong>Power:</strong></td><td>LiPo or solar panel (5V input)</td></tr>
-        <tr><td><strong>Radio:</strong></td><td>LoRa via Meshtastic® (ESP32-based board)</td></tr>
-        <tr><td><strong>Enclosure:</strong></td><td>3D-printed, weather-resistant shell</td></tr>
+      <h2>3. Hardware Requirements</h2>
+      <table style="width:100%; border-collapse: collapse;">
+        <tr>
+          <th style="border-bottom: 1px solid var(--color-border); padding: 8px;">Component</th>
+          <th style="border-bottom: 1px solid var(--color-border); padding: 8px;">Example</th>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Microcontroller</td>
+          <td style="padding: 8px;">Arduino Pro Mini 3.3V</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Sensor</td>
+          <td style="padding: 8px;">BMP280 or BME280</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Radio Module</td>
+          <td style="padding: 8px;">T-Echo, T-BEAM, or similar LoRa boards</td>
+        </tr>
       </table>
 
-      <!-- Section: Assembly -->
-      <h2>4. Assembly Guide</h2>
-      <ol>
-        <li>Solder the BMP/BME280 sensor to the I2C pins on the Arduino</li>
-        <li>Connect power via a 3.3V regulator or directly to VCC</li>
-        <li>Flash firmware using FTDI adapter (set to 3.3V)</li>
-        <li>Mount in weather-resistant enclosure with vents for pressure readings</li>
-      </ol>
+      <h2>4. Example Code</h2>
+      <pre style="background-color: #333; padding: 10px; border-radius: 5px; overflow-x: auto; font-size: 14px;">
+    <code>
+    // Calculate pressure trend
+    float pressureDelta = currentPressure - previousPressure;
+    if (pressureDelta > 0.5) {
+      forecast = "Improving weather";
+    } else if (pressureDelta < -0.5) {
+      forecast = "Worsening weather";
+    } else {
+      forecast = "Stable weather";
+    }
+      </code></pre>
 
-      <!-- Section: Firmware -->
-      <h2>5. Firmware & Flashing</h2>
+      <h2>5. Usage Tips</h2>
       <p>
-        Flash using the Arduino IDE or PlatformIO. Ensure board is set to "Arduino Pro Mini (3.3V, 8 MHz)". The firmware is available on GitHub:
+        Mount the OWF unit away from direct sunlight for more accurate temperature and pressure readings. Ensure the sensor is in a weatherproof, ventilated enclosure. For best forecasting results, keep the device powered on continuously so it can gather and compare long-term pressure data.
       </p>
-      <p><a href="https://github.com/Kwiatens/OWF-Offgrid_Weather_Forecaster" target="_blank">→ OWF Firmware Repository</a></p>
 
-      <!-- Section: Usage -->
-      <h2>6. Usage Instructions</h2>
+      <h2>6. Troubleshooting</h2>
       <ul>
-        <li>Start the OWF and allow the barometer to stabilize</li>
-        <li>Every morning at 5:00 AM (or manually), it will compare trends</li>
-        <li>Forecast will be sent via Meshtastic® with symbols (sun, rain, storm)</li>
+        <li><strong>No forecast?</strong> – Ensure the sensor is properly connected and not reporting null values.</li>
+        <li><strong>Time issues?</strong> – OWF uses internal timers only. Be sure the board has been on long enough for comparisons.</li>
+        <li><strong>LoRa not working?</strong> – Check antenna and radio board configuration.</li>
       </ul>
 
-      <!-- Section: Networking -->
-      <h2>7. Networking via Meshtastic®</h2>
+      <h2>7. License & Credits</h2>
       <p>
-        OWF units communicate using the Meshtastic® mesh protocol. This allows:
+        Project by Kwiatens. View source code and license on <a href="https://github.com/Kwiatens/OWF-Offgrid_Weather_Forecaster" target="_blank">GitHub</a>.
       </p>
-      <ul>
-        <li>Distributed forecasts</li>
-        <li>Fallback communication in emergencies</li>
-        <li>Multi-point environmental coverage</li>
-      </ul>
-
-      <!-- Section: Forecast Algorithm -->
-      <h2>8. Forecast Algorithm</h2>
-      <p>
-        Forecasts are generated using:
-      </p>
-      <ul>
-        <li><strong>Zambretti Forecaster</strong>: Pressure-based rule system</li>
-        <li><strong>Trend Analysis</strong>: Checks short-term pressure change rate</li>
-        <li><strong>Humidity/Temperature Adjustments</strong> (if BME280 is used)</li>
-      </ul>
-
-      <!-- Section: Troubleshooting -->
-      <h2>9. Troubleshooting</h2>
-      <ul>
-        <li><strong>No forecast sent?</strong> Check power and Meshtastic config</li>
-        <li><strong>Wrong predictions?</strong> Let the barometer run for 24h before trusting it</li>
-        <li><strong>Flashing fails?</strong> Confirm you selected 3.3V in the FTDI adapter</li>
-      </ul>
-
-      <!-- Section: Community & Contributions -->
-      <h2>10. Community & Contributions</h2>
-      <p>
-        Join our <strong>Discord Server</strong> for support, feedback, and development updates.
-      </p>
-      <p>
-        Pull requests, forks, and documentation help are very welcome!
-      </p>
-
     </div>
   </div>
   <!-- nie ruszaj bo zepsujesz -->
