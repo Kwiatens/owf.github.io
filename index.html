@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lorem Ipsum</title>
+ <style>
+    :root {
+      --color-bg: #1e1e24;
+      --color-bg-dark: #2b2b33;
+      --color-bg-input: #3a3a43;
+      --color-border: #444;
+      --color-border-light: #333;
+
+      --color-text: #ccc;
+      --color-text-light: #eeeeee;
+      --color-text-heading: #ff9900;
+      --color-placeholder: #888;
+
+      --color-accent: orange;
+      --color-accent-hover: #ff9900;
+
+      --scrollbar-thumb: var(--color-accent);
+      --scrollbar-thumb-hover: var(--color-accent-hover);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      font-family: Arial, sans-serif;
+      color: var(--color-text);
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: var(--color-bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 20px;
+      z-index: 1000;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .logo {
+      color: var(--color-accent);
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: none;
+      background-color: var(--color-bg-input);
+      color: var(--color-text);
+      font-size: 14px;
+    }
+
+    .search-input::placeholder {
+      color: var(--color-placeholder);
+    }
+
+    .github-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 250px;
+      bottom: 0;
+      background-color: var(--color-bg-dark);
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid var(--color-border-light);
+    }
+
+    .menu-section h4 {
+      color: var(--color-text-heading);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .menu-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--color-text);
+      padding: 6px 10px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .menu-link:hover,
+    .menu-link.active {
+      color: var(--color-text-heading);
+    }
+
+    .submenu {
+      display: none;
+      margin-left: 20px;
+      margin-top: 5px;
+    }
+
+    .submenu.show {
+      display: block;
+    }
+
+    .submenu a {
+      display: block;
+      padding: 4px 0;
+      color: var(--color-text);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .submenu a:hover {
+      color: var(--color-text-heading);
+    }
+
+    .arrow {
+      font-size: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .expanded .arrow {
+      transform: rotate(180deg);
+    }
+
+    .content {
+      margin-left: 250px;
+      margin-top: 60px;
+      padding: 20px;
+    }
+
+    .doc-area {
+      background-color: var(--color-bg-dark);
+      padding: 20px;
+      border-radius: 8px;
+      color: var(--color-text-light);
+    }
+
+    /* Scrollbar styling */
+    body,
+    .sidebar {
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) var(--color-bg);
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+      border-radius: 10px;
+      border: 2px solid var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--scrollbar-thumb-hover);
+    }
+    .highlight {
+  background-color: yellow;
+  color: black;
+}
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- Pasek górny -->
+  <div class="top-bar">
+    <div class="logo">LOGO</div>
+
+    <input type="text" placeholder="Szukaj na stronie..." class="search-input" />
+
+    <a href="https://github.com/Kwiatens/OWF-Offgrid_Weather_Forecaster" target="_blank" class="github-link" title="GitHub">
+      <svg viewBox="0 0 16 16" width="24" height="24" fill="orange" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.32c-2.23.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.24.84 1.24.84.72 1.23 1.88.88 2.34.67.07-.52.28-.88.5-1.08-1.78-.2-3.64-.89-3.64-3.96 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.1 0 0 .67-.21 2.2.82A7.7 7.7 0 018 4.77a7.7 7.7 0 011.99.27c1.53-1.03 2.2-.82 2.2-.82.44 1.09.16 1.9.08 2.1.51.56.82 1.27.82 2.15 0 3.08-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Pasek boczny -->
+  <div class="sidebar">
+    <div class="menu-section">
+      <h4>OWF Documentation</h4>
+      <a href="index.html" class="menu-link">Home</a>
+
+      <div class="menu-link" onclick="toggleMenu('milo-submenu', this)">
+        <span>1. Lorem Ipsum</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div id="milo-submenu" class="submenu">
+        <a href="#">Lorem Ipsum</a>
+        <a href="#">Lorem Ipsum</a>
+      </div>
+
+      <div class="menu-link" onclick="toggleMenu('casa-submenu', this)">
+        <span>2. Lorem Ipsum</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div id="casa-submenu" class="submenu">
+        <a href="#">Lorem Ipsum</a>
+        <a href="#">Lorem Ipsum</a>
+      </div>
+
+      <div class="menu-link" onclick="toggleMenu('toolsetter-submenu', this)">
+        <span>3. Lorem Ipsum</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div id="toolsetter-submenu" class="submenu">
+        <a href="#">Lorem Ipsum</a>
+        <a href="#">Lorem Ipsum</a>
+      </div>
+
+      <div class="menu-link" onclick="toggleMenu('os-submenu', this)">
+        <span>4. Lorem Ipsum</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div id="os-submenu" class="submenu">
+        <a href="#">Lorem Ipsum</a>
+        <a href="#">Lorem Ipsum</a>
+      </div>
+
+      <a href="#" class="menu-link">Contact us!</a>
+    </div>
+  </div>
+
+  <!-- Zawartość główna -->
+  <div class="content">
+    <div class="doc-area">
+      <center><h1>  Original OWF (Offgrid Weather Forecaster) by Kwiatens</h1></center>
+       <p>&nbsp;</p>
+       <hr>
+       <p>&nbsp;</p>
+      <center><img src="Original_OWFR1_logo.png" style="filter: invert(1);"></center>
+      <p>
+        OWF is an affordable, offgrid, <a href="https://meshtastic.org">meshtastic®</a> powered weather forecaster that does NOT use the internet. Instead it uses its own sensors to calculate weather predictions using an Zambretti algorithm with a couple of custom algorithms. When calibrated, it can be over 90% accurate for 12 hour predictions! More information about the project on our Discord Server
+      </p>
+       <p>&nbsp;</p>
+       <hr>
+       <p>&nbsp;</p>
+      <center><h1>Features</h1></center>
+        <p>&nbsp;</p>
+       <hr>
+       <p>&nbsp;</p>
+      <p>
+        - Offgrid weather forecasting based on integrated sensor data only - computed by the board itself.
+      </p>
+      <p>
+        - The forecaster can send morning and/or on demand weather raports.
+      </p>
+      <p>
+        - Many OWF units can be linked together to form a more detailed and rich forecast.
+      </p>
+      <p>
+        - More stuff :)
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu(id, element) {
+      const submenu = document.getElementById(id);
+      const isShown = submenu.classList.toggle("show");
+      element.classList.toggle("expanded", isShown);
+    }
+  </script>
+  <script>
+  const searchInput = document.querySelector(".search-input");
+  const docArea = document.querySelector(".doc-area");
+  let originalHTML = docArea.innerHTML;
+
+  function highlightTerm(term) {
+    if (!term) {
+      docArea.innerHTML = originalHTML;
+      return;
+    }
+
+    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // zabezpieczenie przed regex
+    const regex = new RegExp(`(${escapedTerm})`, 'gi');
+
+    docArea.innerHTML = originalHTML.replace(regex, '<span class="highlight">$1</span>');
+
+    // przewiń do pierwszego wyniku
+    const firstMatch = docArea.querySelector('.highlight');
+    if (firstMatch) {
+      firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  searchInput.addEventListener("input", () => {
+    highlightTerm(searchInput.value.trim());
+  });
+</script>
+</body>
+</html>
