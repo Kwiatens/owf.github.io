@@ -293,21 +293,41 @@
       element.classList.toggle("expanded", isShown);
     }
   </script>
-  <script>
+<script>
   const searchInput = document.querySelector(".search-input");
   const docArea = document.querySelector(".doc-area");
-  let originalHTML = docArea.innerHTML;
+  let originalContent = docArea.cloneNode(true); // kopia oryginalnego drzewa DOM
 
-  function highlightTerm(term) {
-    if (!term) {
-      docArea.innerHTML = originalHTML;
-      return;
-    }
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
 
-    const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // zabezpieczenie przed regex
+  function highlightTextInNode(node, term) {
+    const escapedTerm = escapeRegExp(term);
     const regex = new RegExp(`(${escapedTerm})`, 'gi');
 
-    docArea.innerHTML = originalHTML.replace(regex, '<span class="highlight">$1</span>');
+    if (node.nodeType === Node.TEXT_NODE) {
+      const parent = node.parentNode;
+      const temp = document.createElement("span");
+      temp.innerHTML = node.textContent.replace(regex, '<span class="highlight">$1</span>');
+      while (temp.firstChild) {
+        parent.insertBefore(temp.firstChild, node);
+      }
+      parent.removeChild(node);
+    } else if (node.nodeType === Node.ELEMENT_NODE && node.childNodes) {
+      Array.from(node.childNodes).forEach(child => {
+        highlightTextInNode(child, term);
+      });
+    }
+  }
+
+  function highlightTerm(term) {
+    docArea.innerHTML = "";
+    docArea.appendChild(originalContent.cloneNode(true));
+
+    if (!term) return;
+
+    highlightTextInNode(docArea, term);
 
     // przewiń do pierwszego wyniku
     const firstMatch = docArea.querySelector('.highlight');
@@ -320,5 +340,6 @@
     highlightTerm(searchInput.value.trim());
   });
 </script>
+
 </body>
 </html>
