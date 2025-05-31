@@ -252,35 +252,107 @@
   <!-- Zawartość główna (pblo tu pisz, dasz rade) -->
   <div class="content">
     <div class="doc-area">
-      <center><h1>  Original OWF (Offgrid Weather Forecaster) by Kwiatens</h1></center>
-       <p>&nbsp;</p>
-       <hr>
-       <p>&nbsp;</p>
+      <center><h1>OWF R1 Documentation</h1></center>
+      <p>&nbsp;</p>
+      <hr>
+      <p>&nbsp;</p>
       <center><img src="Original_OWFR1_logo.png" style="filter: invert(1);"></center>
+
       <p>
-        OWF is an affordable, offgrid, <a href="https://meshtastic.org">meshtastic®</a> powered weather forecaster that does NOT use the internet. Instead it uses its own sensors to calculate weather predictions using an Zambretti algorithm with a couple of custom algorithms. When calibrated, it can be over 90% accurate for 12 hour predictions! More information about the project on our Discord Server
+        OWF (Offgrid Weather Forecaster) is an offline, sensor-based weather prediction system powered by the <a href="https://meshtastic.org">Meshtastic®</a> ecosystem. This page covers everything needed to build, use, and understand the OWF R1 device.
       </p>
-       <p>&nbsp;</p>
-       <hr>
-       <p>&nbsp;</p>
-      <center><h1>Features</h1></center>
-        <p>&nbsp;</p>
-       <hr>
-       <p>&nbsp;</p>
+
+      <p>&nbsp;</p>
+      <hr>
+      <p>&nbsp;</p>
+
+      <!-- Section: Overview -->
+      <h2>1. Overview</h2>
       <p>
-        - Offgrid weather forecasting based on integrated sensor data only - computed by the board itself.
+        The OWF device is designed for low-power, autonomous forecasting without internet access. Based on the Zambretti forecasting algorithm and enhanced with custom prediction logic, it offers accurate, decentralized weather reporting.
+      </p>
+
+      <!-- Section: Features -->
+      <h2>2. Features</h2>
+      <ul>
+        <li>100% off-grid operation</li>
+        <li>Forecasts based on pressure, trend, and other sensor data</li>
+        <li>Meshtastic® integration for distributed sensor networks</li>
+        <li>Daily automatic forecasts and on-demand reports</li>
+        <li>Expandable via Arduino-compatible headers</li>
+      </ul>
+
+      <!-- Section: Hardware -->
+      <h2>3. Hardware Specifications</h2>
+      <table>
+        <tr><td><strong>MCU:</strong></td><td>Arduino Pro Mini 3.3V / 8 MHz</td></tr>
+        <tr><td><strong>Sensor:</strong></td><td>BMP280 or BME280</td></tr>
+        <tr><td><strong>Power:</strong></td><td>LiPo or solar panel (5V input)</td></tr>
+        <tr><td><strong>Radio:</strong></td><td>LoRa via Meshtastic® (ESP32-based board)</td></tr>
+        <tr><td><strong>Enclosure:</strong></td><td>3D-printed, weather-resistant shell</td></tr>
+      </table>
+
+      <!-- Section: Assembly -->
+      <h2>4. Assembly Guide</h2>
+      <ol>
+        <li>Solder the BMP/BME280 sensor to the I2C pins on the Arduino</li>
+        <li>Connect power via a 3.3V regulator or directly to VCC</li>
+        <li>Flash firmware using FTDI adapter (set to 3.3V)</li>
+        <li>Mount in weather-resistant enclosure with vents for pressure readings</li>
+      </ol>
+
+      <!-- Section: Firmware -->
+      <h2>5. Firmware & Flashing</h2>
+      <p>
+        Flash using the Arduino IDE or PlatformIO. Ensure board is set to "Arduino Pro Mini (3.3V, 8 MHz)". The firmware is available on GitHub:
+      </p>
+      <p><a href="https://github.com/Kwiatens/OWF-Offgrid_Weather_Forecaster" target="_blank">→ OWF Firmware Repository</a></p>
+
+      <!-- Section: Usage -->
+      <h2>6. Usage Instructions</h2>
+      <ul>
+        <li>Start the OWF and allow the barometer to stabilize</li>
+        <li>Every morning at 5:00 AM (or manually), it will compare trends</li>
+        <li>Forecast will be sent via Meshtastic® with symbols (sun, rain, storm)</li>
+      </ul>
+
+      <!-- Section: Networking -->
+      <h2>7. Networking via Meshtastic®</h2>
+      <p>
+        OWF units communicate using the Meshtastic® mesh protocol. This allows:
+      </p>
+      <ul>
+        <li>Distributed forecasts</li>
+        <li>Fallback communication in emergencies</li>
+        <li>Multi-point environmental coverage</li>
+      </ul>
+
+      <!-- Section: Forecast Algorithm -->
+      <h2>8. Forecast Algorithm</h2>
+      <p>
+        Forecasts are generated using:
+      </p>
+      <ul>
+        <li><strong>Zambretti Forecaster</strong>: Pressure-based rule system</li>
+        <li><strong>Trend Analysis</strong>: Checks short-term pressure change rate</li>
+        <li><strong>Humidity/Temperature Adjustments</strong> (if BME280 is used)</li>
+      </ul>
+
+      <!-- Section: Troubleshooting -->
+      <h2>9. Troubleshooting</h2>
+      <ul>
+        <li><strong>No forecast sent?</strong> Check power and Meshtastic config</li>
+        <li><strong>Wrong predictions?</strong> Let the barometer run for 24h before trusting it</li>
+        <li><strong>Flashing fails?</strong> Confirm you selected 3.3V in the FTDI adapter</li>
+      </ul>
+
+      <!-- Section: Community & Contributions -->
+      <h2>10. Community & Contributions</h2>
+      <p>
+        Join our <strong>Discord Server</strong> for support, feedback, and development updates.
       </p>
       <p>
-        - The forecaster can send morning and/or on demand weather raports.
-      </p>
-      <p>
-        - Many OWF units can be linked together to form a more detailed and rich forecast.
-      </p>
-      <p>
-        - More stuff :)
-      </p>
-      <p>
-        testtest test test test
+        Pull requests, forks, and documentation help are very welcome!
       </p>
 
     </div>
