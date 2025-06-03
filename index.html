@@ -249,79 +249,75 @@
     </div>
   </div>
 
-  <!-- Zawartość główna -->
-<div class="content" style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif; line-height: 1.6;">
-  <div class="doc-area">
-    <h2>1. Introduction</h2>
-    <p>
-      The OWF (Offgrid Weather Forecaster) is a standalone weather forecasting device that uses sensor data and local algorithms to predict weather conditions without any internet access. It is powered by <a href="https://meshtastic.org" target="_blank">meshtastic®</a> and designed for low-power, remote operation.
-    </p>
+  <!-- Zawartość główna (pblo tu pisz, dasz rade) -->
+  <div class="content">
+    <div class="doc-area">
+      <h2>1. Introduction</h2>
+      <p>
+        The OWF (Offgrid Weather Forecaster) is a standalone weather forecasting device that uses sensor data and local algorithms to predict weather conditions without any internet access. It is powered by <a href="https://meshtastic.org">meshtastic®</a> and designed for low-power, remote operation.
+      </p>
 
-    <h2>2. Features</h2>
-    <ul>
-      <li>Completely offgrid – no Wi-Fi, no GSM, no internet required</li>
-      <li>Uses pressure trends and algorithms like Zambretti for prediction</li>
-      <li>Supports Meshtastic® radio communication</li>
-      <li>Forecast sharing between devices</li>
-      <li>Low power consumption, solar-compatible</li>
-    </ul>
+      <h2>2. Features</h2>
+      <ul>
+        <li>Completely offgrid – no Wi-Fi, no GSM, no internet required</li>
+        <li>Uses pressure trends and algorithms like Zambretti for prediction</li>
+        <li>Supports Meshtastic® radio communication</li>
+        <li>Forecast sharing between devices</li>
+        <li>Low power consumption, solar-compatible</li>
+      </ul>
 
-    <h2>3. Hardware Requirements</h2>
-    <table style="width:100%; border-collapse: collapse; margin-bottom: 1em;">
-      <tr>
-        <th style="border-bottom: 1px solid #ccc; padding: 8px; text-align: left;">Component</th>
-        <th style="border-bottom: 1px solid #ccc; padding: 8px; text-align: left;">Example</th>
-      </tr>
-      <tr>
-        <td style="padding: 8px;">Microcontroller</td>
-        <td style="padding: 8px;">Arduino Pro Mini 3.3V</td>
-      </tr>
-      <tr>
-        <td style="padding: 8px;">Sensor</td>
-        <td style="padding: 8px;">BMP280 or BME280</td>
-      </tr>
-      <tr>
-        <td style="padding: 8px;">Radio Module</td>
-        <td style="padding: 8px;">T-Echo, T-BEAM, or similar LoRa boards</td>
-      </tr>
-    </table>
+      <h2>3. Hardware Requirements</h2>
+      <table style="width:100%; border-collapse: collapse;">
+        <tr>
+          <th style="border-bottom: 1px solid var(--color-border); padding: 8px;">Component</th>
+          <th style="border-bottom: 1px solid var(--color-border); padding: 8px;">Example</th>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Microcontroller</td>
+          <td style="padding: 8px;">Arduino Pro Mini 3.3V</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Sensor</td>
+          <td style="padding: 8px;">BMP280 or BME280</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Radio Module</td>
+          <td style="padding: 8px;">T-Echo, T-BEAM, or similar LoRa boards</td>
+        </tr>
+      </table>
 
-    <h2>4. Example Code</h2>
-    <div style="background-color: #2d2d2d; padding: 12px; border-radius: 6px; max-width: 300px; margin: 0 auto 1em; color: #eee; font-family: monospace; font-size: 14px; overflow-x: auto;">
-<pre style="margin: 0;">
-<code>
-// Calculate pressure trend
-float pressureDelta = currentPressure - previousPressure;
-if (pressureDelta > 0.5) {
-  forecast = "Improving weather";
-} else if (pressureDelta < -0.5) {
-  forecast = "Worsening weather";
-} else {
-  forecast = "Stable weather";
-}
-</code>
-</pre>
+      <h2>4. Example Code</h2>
+      <pre style="background-color: #333; padding: 10px; border-radius: 5px; overflow-x: auto; font-size: 14px;">
+    <code>
+    // Calculate pressure trend
+    float pressureDelta = currentPressure - previousPressure;
+    if (pressureDelta > 0.5) {
+      forecast = "Improving weather";
+    } else if (pressureDelta < -0.5) {
+      forecast = "Worsening weather";
+    } else {
+      forecast = "Stable weather";
+    }
+      </code></pre>
+
+      <h2>5. Usage Tips</h2>
+      <p>
+        Mount the OWF unit away from direct sunlight for more accurate temperature and pressure readings. Ensure the sensor is in a weatherproof, ventilated enclosure. For best forecasting results, keep the device powered on continuously so it can gather and compare long-term pressure data.
+      </p>
+
+      <h2>6. Troubleshooting</h2>
+      <ul>
+        <li><strong>No forecast?</strong> – Ensure the sensor is properly connected and not reporting null values.</li>
+        <li><strong>Time issues?</strong> – OWF uses internal timers only. Be sure the board has been on long enough for comparisons.</li>
+        <li><strong>LoRa not working?</strong> – Check antenna and radio board configuration.</li>
+      </ul>
+
+      <h2>7. License & Credits</h2>
+      <p>
+        Project by Kwiatens. View source code and license on <a href="https://github.com/Kwiatens/OWF-Offgrid_Weather_Forecaster" target="_blank">GitHub</a>.
+      </p>
     </div>
-
-    <h2>5. Usage Tips</h2>
-    <p>
-      Mount the OWF unit away from direct sunlight for more accurate temperature and pressure readings. Ensure the sensor is in a weatherproof, ventilated enclosure. For best forecasting results, keep the device powered on continuously so it can gather and compare long-term pressure data.
-    </p>
-
-    <h2>6. Troubleshooting</h2>
-    <ul>
-      <li><strong>No forecast?</strong> – Ensure the sensor is properly connected and not reporting null values.</li>
-      <li><strong>Time issues?</strong> – OWF uses internal timers only. Be sure the board has been on long enough for comparisons.</li>
-      <li><strong>LoRa not working?</strong> – Check antenna and radio board configuration.</li>
-    </ul>
-
-    <h2>7. License & Credits</h2>
-    <p>
-      Project by Kwiatens. View source code and license on <a href="https://github.com/Kwiatens/OWF-Offgrid_Weather_Forecaster" target="_blank">GitHub</a>.
-    </p>
   </div>
-</div>
-
   <!-- nie ruszaj bo zepsujesz -->
   <script>
     function toggleMenu(id, element) {
